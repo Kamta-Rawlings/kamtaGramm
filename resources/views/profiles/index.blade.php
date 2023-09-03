@@ -20,7 +20,8 @@
                 <div class="d-flex align-items-center">
                 <div class="h4">{{$user->username}}</div>
 
-                <follow-button user-id="{{$user->id}}"></follow-button>
+                {{-- <follow-button user-id="{{$user->id}}"></follow-button> --}}
+                <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button>
                 </div>
 
 
@@ -41,8 +42,8 @@
 
             <div class="d-flex">
                 <div style="padding-right: 9px;"><strong>{{$user->posts->count()}}</strong>post</div>
-                <div style="padding-right: 9px;"><strong>23k</strong>followers</div>
-                <div style="padding-right: 9px;"><strong>212</strong>following</div>
+                <div style="padding-right: 9px;"><strong>{{$user->profile->followers->count()}}</strong>followers</div>
+                <div style="padding-right: 9px;"><strong>{{$user->following->count()}}</strong>following</div>
             </div>
             <div class="pt-3 font-weight-bold">{{$user->profile->title}}</div><!--fetching the user's title from the db-->
             <div> {{$user->profile->description}}</div>

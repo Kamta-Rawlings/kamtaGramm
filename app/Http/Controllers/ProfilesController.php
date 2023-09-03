@@ -15,8 +15,10 @@ class ProfilesController extends Controller
         // return view('profiles.index', [
         //     'user'=>$user,
         // ]);
+        $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
+        //dd($follows);
 
-        return view('Profiles.index', compact('user'));
+        return view('Profiles.index', compact('user', 'follows'));
 
        // dd($user);
        // dd(User::find($user));findorfail is used when a user gives something inappropriate to the web 
