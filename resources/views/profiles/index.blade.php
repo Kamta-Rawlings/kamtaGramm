@@ -41,9 +41,9 @@
             {{-- @endcan --}}
 
             <div class="d-flex">
-                <div style="padding-right: 9px;"><strong>{{$user->posts->count()}}</strong>post</div>
-                <div style="padding-right: 9px;"><strong>{{$user->profile->followers->count()}}</strong>followers</div>
-                <div style="padding-right: 9px;"><strong>{{$user->following->count()}}</strong>following</div>
+                <div style="padding-right: 9px;"><strong>{{$postCount}}</strong>post</div>
+                <div style="padding-right: 9px;"><strong>{{$followersCount}}</strong>followers</div>
+                <div style="padding-right: 9px;"><strong>{{$followingCount}}</strong>following</div>
             </div>
             <div class="pt-3 font-weight-bold">{{$user->profile->title}}</div><!--fetching the user's title from the db-->
             <div> {{$user->profile->description}}</div>

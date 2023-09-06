@@ -23,6 +23,10 @@ Auth::routes();
 //     return['success'];
 // });
 
+Route::get('/email', function(){
+    return new NewUserWelcomeMail();
+});
+
 Route::post('follow/{user}', 'FollowsController@store');
 
 
