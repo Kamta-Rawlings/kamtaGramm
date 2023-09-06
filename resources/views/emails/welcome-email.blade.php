@@ -1,12 +1,8 @@
 <x-mail::message>
 # Welcome to KamtaGramm
 
-The body of your message.
+The is a copy of Instagram built on the laravel framework, and I am happy you have joined.
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
-
-Thanks,<br>
-{{ config('app.name') }}
+All the best,<br>
+Kamta
 </x-mail::message>

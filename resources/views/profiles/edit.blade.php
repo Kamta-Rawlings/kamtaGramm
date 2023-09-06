@@ -16,7 +16,7 @@
                     <h1>Edit Profiles</h1>
                 </div>
                 
-                    <label for="title" class="col-md-4 col-form-label">Post title</label>
+                    <label for="title" class="col-md-4 col-form-label">Title</label>
                     <div class="col-md-6">
                         <input id="title" type="text" 
                         class="form-control @error('title') is-invalid @enderror" 
@@ -27,6 +27,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
 
                         <label for="description" class="col-md-4 col-form-label">Post description</label>
                         <div class="col-md-6">
@@ -39,6 +40,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
 
                             <label for="url" class="col-md-4 col-form-label">Post url</label>
                             <div class="col-md-6">
@@ -51,6 +53,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
                    
                     <div class="row pt-3">
                             <label for="image" class="col-md-4 col-form-label ">Profile Image</label>

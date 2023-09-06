@@ -1,6 +1,8 @@
 <?php
-
+// namespace App\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Mail\NewUserWelcomeMail;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +25,8 @@ Auth::routes();
 //     return['success'];
 // });
 
-Route::get('/email', function(){
-    return new NewUserWelcomeMail();
+Route::get('/email', function () {
+    return new NewUserWelcomeMail() ;
 });
 
 Route::post('follow/{user}', 'FollowsController@store');

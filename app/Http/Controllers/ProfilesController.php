@@ -9,88 +9,67 @@ use Intervention\Image\Facades\Image;
 
 class ProfilesController extends Controller
 {
-    //code to return the exact user in the profiles page
-    public function index(\App\Models\User $user)
+    public function index(User $user)
     {
-        // $user= User::findorFail($user); 
-        // return view('profiles.index', [
-        //     'user'=>$user,
-        // ]);
         $follows = (auth()->user()) ? auth()->user()->following->contains($user->id) : false;
-       
-        $postCount = Cache::remember('count.posts.'. $user->id, 
-        now()->addseconds(30), 
-        function()use($user){
-            return $user->posts->count();
-        }) ; 
 
-        $followersCount = Cache::remember('count.posts.'. $user->id, 
-        now()->addseconds(30), 
-        function()use($user){
-            return $user->profile->followers->count();
-        }) ; 
+        $postCount = Cache::remember(
+            'count.posts.' . $user->id,
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->posts->count();
+            });
 
-        $followingCount = Cache::remember('count.posts.'. $user->id, 
-        now()->addseconds(30), 
-        function()use($user){
-            return $user->following->count();
-        }) ; 
-        // $followersCount = $user->profile->followers->count();
-        // $followingCount = $user->following->count();
-        //dd($follows);
+        $followersCount = Cache::remember(
+            'count.followers.' . $user->id,
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->profile->followers->count();
+            });
 
-        return view('Profiles.index', compact('user', 'follows', 'postCount', 'followersCount', 'followingCount'));
+        $followingCount = Cache::remember(
+            'count.following.' . $user->id,
+            now()->addSeconds(30),
+            function () use ($user) {
+                return $user->following->count();
+            });
 
-       // dd($user);
-       // dd(User::find($user));findorfail is used when a user gives something inappropriate to the web 
-       //so it breaks
-      
-    } //old and long way for the eindex route
-
-    public function edit(\App\Models\User $user)
-    {
-        // $this->authorize ('update', $user->profile);
-        return view('Profiles.edit', compact('user'));
-       
-       
-       
-
+        return view('profiles.index', compact('user', 'follows', 'postCount', 'followersCount', 'followingCount'));
     }
 
-    public function update(\App\Models\User $user)
+    public function edit(User $user)
     {
-        // closing the edit profile endpoint
-    //  $this->authorize('update', $user->profile);
+        $this->authorize('update', $user->profile);
+
+        return view('profiles.edit', compact('user'));
+    }
+
+    public function update(User $user)
+    {
+        $this->authorize('update', $user->profile);
 
         $data = request()->validate([
-            'title'=>'required',
-            'description'=>'required',
-            'url'=>'url',
-            'image'=>'',
-
+            'title' => 'required',
+            'description' => 'required',
+            'url' => 'url',
+            'image' => '',
         ]);
-        // dd($data);
-       
 
-        if(request('image')){
+        if (request('image')) {
+            $imagePath = request('image')->store('profile', 'public');
 
-            $imagePath = request('image')->store('profile','public');
-
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(100,100);
+            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
             $image->save();
-           
-            //use this path to let you be able to leave the pic open
+
             $imageArray = ['image' => $imagePath];
-    
         }
-        // dd($data);
 
         auth()->user()->profile->update(array_merge(
             $data,
             $imageArray ?? []
-            //['image'=>$imagePath ?? null]
         ));
 
         return redirect("/profile/{$user->id}");
     }
 }
+

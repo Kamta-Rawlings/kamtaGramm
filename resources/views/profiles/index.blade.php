@@ -17,28 +17,26 @@
             <!--Making the views in homeblade to be dynamic(by fetching data from the database)-->
             <div class="d-flex justify-content-between align-items-baseline"><!--justify and align commands -->
                 
-                <div class="d-flex align-items-center">
-                <div class="h4">{{$user->username}}</div>
+            <div class="d-flex align-items-center">
+            <div class="h4">{{$user->username}}</div>
 
-                {{-- <follow-button user-id="{{$user->id}}"></follow-button> --}}
-                <follow-button user-id="{{$user->id}}" follows="{{$follows}}"></follow-button>
-                </div>
+                <follow-button user-id="{{ $user->id }}" follows="{{ $follows }}"></follow-button>
+            </div>
 
 
                 {{-- To be sure only the authozised user can add a post on his page
                 and be able to see the correct user name --}}
 
-                {{-- @can('update', $user->profile) --}}
-                <a href="/p/create">Add new Post</a>
-                {{-- @endcan --}}
-            
+                @can('update', $user->profile)
+                <a href="/p/create">Add New Post</a>
+            @endcan
             
             </div>
 
             {{-- TO hide the edit link so unauthozized users cannot click it --}}
-            {{-- @can('update', $user->profile) --}}
-            <a href="/profile/{{$user->id}}/edit">Edit Profile</a>
-            {{-- @endcan --}}
+            @can('update', $user->profile)
+                <a href="/profile/{{ $user->id }}/edit">Edit Profile</a>
+            @endcan
 
             <div class="d-flex">
                 <div style="padding-right: 9px;"><strong>{{$postCount}}</strong>post</div>

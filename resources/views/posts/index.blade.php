@@ -26,6 +26,7 @@
 
 </div>
 </div>
+@endforeach
 
  <div class="row">
     <div class="col-12 d-flex justify-content-center">
@@ -33,7 +34,7 @@
     </div>
  </div>
        
-   @endforeach
+ 
 </div>
   
 @endsection

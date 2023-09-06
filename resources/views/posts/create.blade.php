@@ -24,6 +24,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
                    
                     <div class="row pt-3">
                             <label for="image" class="col-md-4 col-form-label ">Post Image</label>

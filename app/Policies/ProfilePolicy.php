@@ -6,7 +6,7 @@ use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ProfillePolicy
+class ProfilePolicy
 {
     use HandlesAuthorization;
 
@@ -53,9 +53,9 @@ class ProfillePolicy
      */
 
     //  to give access to only authorised users to click that endpoint
-    public function update(User $user, Profile $profile): bool
+    public function update(User $user, Profile $profile)
     {
-        // return $user->id == $profile->user_id;
+        return $user->id == $profile->user_id;
     }
 
     /**
